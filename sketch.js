@@ -60,7 +60,7 @@ function setup() {
     count = 0;
     button = createButton("Next");
     button.position(windowWidth*.7, windowHeight/2.5);
-    var canvas = createCanvas(windowWidth, windowHeight);
+    var canvas = createCanvas(windowWidth*2, windowHeight);
     imageMode(CENTER);
     space.width = windowWidth;
     space.height = windowHeight;
