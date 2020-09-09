@@ -59,21 +59,21 @@ function preload() {
 function setup() {
     count = 0;
     button = createButton("Next");
-    button.position(displayWidth*.7, displayHeight/2.5);
-    var canvas = createCanvas(displayWidth, displayHeight);
+    button.position(windowWidth*.7, windowHeight/2.5);
+    var canvas = createCanvas(windowWidth, windowHeight);
     imageMode(CENTER);
-    space.width = displayWidth;
-    space.height = displayHeight;
+    space.width = windowWidth;
+    space.height = windowHeight;
     rectMode(CENTER);
     recta = createSprite(150, 300, 50, 50);
     recta.addImage(rocket);
     recto = createSprite(recta.x - 40, recta.y + 80, 50, 50);
     recto.addImage(net);
     DamagedR = [rocket, damaged1, damaged2, damaged3, damaged4];
-    wall = createSprite(0, displayHeight/2, 5, displayHeight);
-    up_arrow = createSprite(displayWidth*.9, displayHeight/2, 35, 35);
+    wall = createSprite(0, windowHeight/2, 5, windowHeight);
+    up_arrow = createSprite(windowWidth*.9, windowHeight/2, 35, 35);
     up_arrow.addImage(up_img);
-    down_arrow = createSprite(displayWidth*.9, displayHeight/1.6, 35, 35);
+    down_arrow = createSprite(windowWidth*.9, windowHeight/1.6, 35, 35);
     down_arrow.addImage(down_img);
     level1Debris.push(a0);
     level1Debris.push(a1);
@@ -132,21 +132,21 @@ function setup() {
     level3Debrisi.push(scrap1);
     level3Debrisi.push(scrap3);
     for(i=0; i<level1Debris.length; i++){
-        y = random(displayWidth/6, displayHeight/2.5);
+        y = random(windowWidth/6, windowHeight/2.5);
         between = random(1, 5)
-        level1Debris[i] = createSprite(200*i*between + displayWidth, y, 500, 400);
+        level1Debris[i] = createSprite(200*i*between + windowWidth, y, 500, 400);
         level1Debris[i].addImage(level1Debrisi[i]);
     }
     for(j=0; j<level2Debris.length; j++){
         y = random(250, 400);
         between = random(1, 5)
-        level2Debris[j] = createSprite(100*j*between + displayWidth*1.1, y, 500, 400);
+        level2Debris[j] = createSprite(100*j*between + windowWidth*1.1, y, 500, 400);
         level2Debris[j].addImage(level2Debrisi[j]);
     }
     for(k=0; k<level3Debris.length; k++){
         y = random(250, 400);
         between = random(1, 3)
-        level3Debris[k] = createSprite(75*k*between + displayWidth*1.25, y, 500, 400);
+        level3Debris[k] = createSprite(75*k*between + windowWidth*1.25, y, 500, 400);
         level3Debris[k].addImage(level3Debrisi[k]);
     }
     if(intro === 1){
@@ -167,24 +167,24 @@ function draw() {
     if(inPlay === false && health === 100 && score === 0){
         fill(255);
         textSize(35);
-        image(ground_control, displayWidth/1.825, displayHeight/1.35, displayWidth*1.5, displayHeight*2);
+        image(ground_control, windowWidth/1.825, windowHeight/1.35, windowWidth*1.5, windowHeight*2);
         button.mousePressed(next);
         if(intro === 1){
-            text("OH NO!!! Hey Player! A lot of Space Debris", displayWidth/4, displayHeight/2.5);
-            text(" was just detected entering the atmosphere", displayWidth/4, displayHeight/2.25);
+            text("OH NO!!! Hey Player! A lot of Space Debris", windowWidth/4, windowHeight/2.5);
+            text(" was just detected entering the atmosphere", windowWidth/4, windowHeight/2.25);
         }
         if(intro === 2){
-            text("You have to clean them up", displayWidth/4, displayHeight/2.5);
-            text("by collecting them in your net", displayWidth/4, displayHeight/2.25);
+            text("You have to clean them up", windowWidth/4, windowHeight/2.5);
+            text("by collecting them in your net", windowWidth/4, windowHeight/2.25);
         }
         if(intro === 3){
-            text("Don't let your rocket get hit", displayWidth/4, displayHeight/2.5);
-            text("Or else it will get damaged!", displayWidth/4, displayHeight/2.25);
+            text("Don't let your rocket get hit", windowWidth/4, windowHeight/2.5);
+            text("Or else it will get damaged!", windowWidth/4, windowHeight/2.25);
         }
         if(intro === 4){
-            text("Request accepted.", displayWidth/3, displayHeight/7);
-            text("I will proceed with", displayWidth/3, displayHeight/5.75);
-            text("the mission", displayWidth/3, displayHeight/4.85);
+            text("Request accepted.", windowWidth/3, windowHeight/7);
+            text("I will proceed with", windowWidth/3, windowHeight/5.75);
+            text("the mission", windowWidth/3, windowHeight/4.85);
         }
         if(intro === 5){
             inPlay === true;
@@ -224,20 +224,21 @@ function draw() {
                 level3Debris[k].velocityX = -7*between;
             }
         }
-        image(space, displayWidth/2, displayHeight/2, displayWidth, displayHeight);
+        image(space, windowWidth/2, windowHeight/2, windowWidth, windowHeight);
         button.hide();
         push();
-        translate(displayWidth/2, displayHeight*1.6);
-        rotate(x);
-        image(earth, 0, 0, displayWidth*1.25, displayHeight*2.5);
+        imageMode(CENTER);
+        translate(windowWidth/2, windowHeight*1.5);
+        rotate(x/2);
+        image(earth, 0, 0, windowWidth*1.25, windowHeight*2.5);
         pop();
     
         textSize(35);
         fill(255);
         textFont(spaceFont);
-        tscore = text("Score: " + score, displayWidth/1.25, displayHeight/25);
+        tscore = text("Score: " + score, windowWidth/1.25, windowHeight/25);
         thealth = text("Health: " + health + "%", 50, 50);
-        tlevel = text("Level", displayWidth/2.2, displayHeight/27);
+        tlevel = text("Level", windowWidth/2.2, windowHeight/27);
         textSize(50);
         if(gameState === "one"){
             fill(63, 142, 252);
@@ -246,7 +247,7 @@ function draw() {
         } else if(gameState === "three"){
             fill(255, 49, 46);
         }
-        tgameState = text(gameState, displayWidth/1.9, displayHeight/25);
+        tgameState = text(gameState, windowWidth/1.9, windowHeight/25);
         
         if(score < 350){
             gameState = "one";
@@ -336,9 +337,9 @@ function draw() {
         textSize(100);
         fill(255);
         textFont(spaceFont);
-        text("GAME       OVER", displayWidth/3.25, displayHeight*.375);
+        text("GAME       OVER", windowWidth/3.25, windowHeight*.375);
         textSize(50);
-        text("Your      score       was     " + score, displayWidth/3.1, displayHeight/2);
+        text("Your      score       was     " + score, windowWidth/3.1, windowHeight/2);
     }
 
     if(inPlay === false && gameState === 'four'){
@@ -352,9 +353,9 @@ function draw() {
         textSize(100);
         fill(255);
         textFont(spaceFont);
-        text("You Saved the World!!! You Won!", displayWidth/20, displayHeight*.375);
+        text("You Saved the World!!! You Won!", windowWidth/20, windowHeight*.375);
         textSize(50);
-        text("Your      score       was     " + score, displayWidth/3.1, displayHeight/2);
+        text("Your      score       was     " + score, windowWidth/3.1, windowHeight/2);
     }
     
     if(health >= 20){
